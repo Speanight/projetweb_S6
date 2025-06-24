@@ -1,4 +1,6 @@
 <?php require_once("header.php"); ?>
+<script src="/src/js/addboat.js" defer></script>
+
 
 <body
         class="min-h-screen w-full bg-cover bg-center bg-no-repeat bg-[#00122C]/50 bg-blend-multiply p-8 backdrop-blur-sm flex flex-row gap-4 overflow-hidden"
