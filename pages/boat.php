@@ -1,5 +1,5 @@
 <?php require_once("header.php"); ?>
-<script src="/src/js/addboat.js" defer></script>
+<script src="/src/js/boat.js" defer></script>
 
 
 <body
@@ -32,10 +32,16 @@
             <label for="status" class="block mb-2 text-sm font-medium">Status</label>
             <select id="status" name="status"
                     class="appearance-none bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                <option>Stopped</option>
-                <option>Wrecked</option>
-                <option>Fishing</option>
-                <option>Cruising</option>
+                <option value="1">Anchored</option>
+                <option value="2">Not under command</option>
+                <option value="3">Restricted Maneuverability</option>
+                <option value="5">Moored</option>
+                <option value="6">Aground</option>
+                <option value="7">Engaged in fishing</option>
+                <option value="8">Under way sailing</option>
+                <option value="14">SART / MOB/ EPIRB</option>
+                <option value="15">Undefined</option>
+
             </select>
             <div class="pointer-events-none absolute inset-y-0 right-3 flex items-center text-gray-700">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"
@@ -128,7 +134,7 @@
             <div class="flex items-center justify-between">
                 <div>
                     <p class="text-sm text-gray-500 font-medium">Ships tracked</p>
-                    <p class="text-2xl font-bold">795</p>
+                    <p id="numShipsTracked" class="text-2xl font-bold">795</p>
                 </div>
                 <div class="text-sm text-red-500 font-semibold flex items-center gap-1">
                     <span>1.39%</span>
@@ -144,7 +150,7 @@
             <div class="flex items-center justify-between">
                 <div>
                     <p class="text-sm text-gray-500 font-medium">Ships docked</p>
-                    <p class="text-2xl font-bold">573</p>
+                    <p id="numShipsDocked" class="text-2xl font-bold">573</p>
                 </div>
                 <div class="text-sm text-green-600 font-semibold flex items-center gap-1">
                     <span>2.69%</span>
