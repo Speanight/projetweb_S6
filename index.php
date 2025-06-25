@@ -1,4 +1,6 @@
 <?php
+ini_set('display_errors', 1);
+
 $method = $_SERVER["REQUEST_METHOD"];
 $uri    = explode("?", $_SERVER["REQUEST_URI"])[0];
 
