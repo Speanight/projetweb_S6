@@ -48,3 +48,65 @@ const layout = {
 Plotly.setPlotConfig({ mapboxAccessToken: 'pk.eyJ1IjoibmlyaWphbSIsImEiOiJjbWNiMHhyZWQwYXF1MmtzYnRvNHRzenpjIn0.iY39sB9K0IUgezsqp_4Icg' });
 
 Plotly.newPlot('map', data, layout, { responsive: true });
+
+
+//------------------------------------------------------------------------------
+//--- Listeners --------------------------------------------------------------
+//------------------------------------------------------------------------------
+document.querySelectorAll('.predict-trajectory').forEach(item => {
+    item.addEventListener('click', (event) => {
+    event.preventDefault();
+    timestamp = event.target.parentNode.parentNode.getElementsByClassName("input-timestamp")[0].value;
+    mmsi = event.target.parentNode.parentNode.getElementsByClassName("input-timestamp")[0].id.substr(10);
+    // SOG COG Heading VesselType Delta_sec
+    id = event.target.parentNode.parentNode.getElementsByClassName("trajectory-id")[0].value;
+
+    const data = new URLSearchParams({
+        id,
+        timestamp,
+        mmsi
+    }).toString();
+
+    ajaxRequest('GET', '/predicttrajectory', function(response) {
+        event.target.parentNode.parentNode.parentNode.getElementsByClassName("pred-answer")[0].style.display = 'block';
+        event.target.parentNode.parentNode.parentNode.getElementsByClassName("pred-text")[0].innerHTML = `
+        Your ship is predicted to be at <strong>${response.LAT} / ${response.LON}</strong> after <strong>${response.time}</strong> minutes.`
+    }, data);
+    })
+});
+
+document.querySelectorAll('.change-type').forEach(item => {
+    item.addEventListener('click', (event) => {
+        event.preventDefault();
+        mmsi = event.target.parentNode.parentNode.getElementsByClassName("boatType-mmsi")[0].value;
+        type = event.target.parentNode.parentNode.getElementsByClassName("boatType-type")[0].value;
+
+        const data = new URLSearchParams({
+            mmsi,
+            type
+        })
+
+        ajaxRequest('PUT', '/edit/vesseltype', function(response) {
+            handlerNotification(response);
+
+            var color = "";
+
+            switch (response.type) {
+                case 60:
+                    color = "text-red-600";
+                    break;
+                
+                case 70:
+                    color = "text-lime-600";
+                    break;
+                
+                case 80:
+                    color = "text-sky-600";
+                    break;
+            }
+
+            event.target.parentNode.parentNode.parentNode.getElementsByClassName("type-prediction")[0].innerHTML = `
+            The ship is predicted to be a <strong class="${color}">${response.descr}</strong>`
+        }, data);
+    })
+})

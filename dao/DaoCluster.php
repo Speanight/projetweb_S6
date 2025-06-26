@@ -30,6 +30,11 @@ class DaoCluster {
         $statement->execute();
 
         $c = $statement->fetch();
+
+        if ($c == false) {
+            return null;
+        }
+
         $cluster = new Cluster($c['num_cluster'], $c['description']);
 
         return $cluster;

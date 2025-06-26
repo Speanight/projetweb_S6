@@ -64,6 +64,7 @@ if __name__ == '__main__':
     match model:
         case 'typeNavire':
             data['result'] = type_navire(boat_data).tolist()
+            data['result'][0] = data['result'][0] * 10 + 60
             # On indique que l'on a obtenu un résultat
             data['scriptStatus'] = 0
         case 'Cluster':

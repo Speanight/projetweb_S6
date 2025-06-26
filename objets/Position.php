@@ -2,17 +2,17 @@
 require_once "objets/Ship.php";
 
 class Position {
-    private int $id;
+    private ?int $id;
     private float $lat;
     private float $lon;
-    private DateTime $timestamp;
+    private int $timestamp;
     private float $sog;
     private float $cog;
     private float $heading;
     private int $status;
     private Ship $ship;
 
-    public function __construct($id, $lat, $lon, $timestamp, $sog, $cog, $heading, $status, $ship) {
+    public function __construct($id = null, $lat, $lon, $timestamp, $sog, $cog, $heading, $status, $ship) {
         $this->id = $id;
         $this->lat = $lat;
         $this->lon = $lon;
@@ -139,7 +139,8 @@ class Position {
         $result['COG'] = $this->cog;
         $result['Heading'] = $this->heading;
         $result['status'] = $this->status;
-        $result['VesselType'] = $this->ship->get_type()->get_type();
+        
+        $result = array_merge($result, $this->ship->toArrayFlat());
 
         return $result;
     }

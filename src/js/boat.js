@@ -32,7 +32,9 @@ function insertShip() {
 
     // Envoi de la requête AJAX
     ajaxRequest('POST', '/insertboat', function(response) {
-        console.log(response);
+        // console.log(response);
+        handlerNotification(response);
+        // updateStatShips();
     }, data);
 }
 

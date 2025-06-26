@@ -30,6 +30,11 @@ class DaoVesselType {
         $statement->execute();
 
         $t = $statement->fetch();
+
+        if ($t == false) {
+            return null;
+        }
+
         $type = new VesselType($t['type'], $t['description']);
 
         return $type;

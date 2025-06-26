@@ -119,17 +119,15 @@ class DaoShip {
     
 
     public function addShip(Ship $ship){
-        $statement = $this->db->prepare('INSERT INTO ship (mmsi, vesselname, imo, length, width, draft) VALUES (:mmsi, :type, :imo, :length, :width, :draft)');
-        $statement->bindParam(":beg", $beginning);
-        $statement->bindParam(":end", $ending);
-        $statement->bindParam(":id_place", $idPlace);
-        $statement->bindParam(":id_user", $idUser);
+        $statement = $this->db->prepare('INSERT INTO ship (mmsi, vesselname, imo, length, width, draft, type, num_cluster) VALUES (:mmsi, :vesselname, :imo, :length, :width, :draft, :type, :num_cluster)');
         $statement->bindParam(":mmsi", $ship->get_mmsi());
-        $statement->bindParam(":type", $ship->get_type()->get_type());
+        $statement->bindParam(":vesselname", $ship->get_vesselname());
         $statement->bindParam(":imo", $ship->get_imo());
         $statement->bindParam(":length", $ship->get_length());
         $statement->bindParam(":width", $ship->get_width());
         $statement->bindParam(":draft", $ship->get_draft());
+        $statement->bindParam(":type", $ship->get_type()->get_type());
+        $statement->bindParam(":num_cluster", $ship->get_cluster()->get_num_cluster());
 
         return $statement->execute();
     }
@@ -160,5 +158,12 @@ class DaoShip {
         }
 
         return $result;
+    }
+
+    public function setType($ship) {
+        $statement = $this->db->prepare("UPDATE ship SET type = :type WHERE mmsi = :mmsi");
+        $statement->bindParam(":type", $ship->get_type()->get_type());
+        $statement->bindParam(":mmsi", $ship->get_mmsi());
+        $statement->execute();
     }
 }

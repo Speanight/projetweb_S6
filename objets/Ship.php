@@ -12,7 +12,7 @@ class Ship {
     private ?VesselType $type;
     private ?Cluster $cluster;
 
-    public function __construct(string $mmsi, string $vesselName, string $imo, float $length, float $width, float $draft, ?VesselType $type, ?Cluster $cluster = null) {
+    public function __construct(string $mmsi, string $vesselName, string $imo = 'xxxxxxx', float $length, float $width, float $draft, ?VesselType $type, ?Cluster $cluster = null) {
         $this->mmsi = $mmsi;
         $this->vesselName = $vesselName;
         $this->imo = $imo;
@@ -48,7 +48,7 @@ class Ship {
         return $this->draft;
     }
 
-    public function get_type(): VesselType {
+    public function get_type(): ?VesselType {
         return $this->type;
     }
 
@@ -117,6 +117,19 @@ class Ship {
         else                        $result['type']     = $this->type->toArray();
         if ($this->cluster == null) $result['cluster']  = null;
         else                        $result['cluster']  = $this->cluster->toArray();
+
+        return $result;
+    }
+
+    public function toArrayFlat() {
+        $result = [];
+        $result['mmsi']         = $this->mmsi;
+        $result['vesselName']   = $this->vesselName;
+        $result['imo']          = $this->imo;
+        $result['Length']       = $this->length;
+        $result['Width']        = $this->width;
+        $result['Draft']        = $this->draft;
+        $result = array_merge($result, $this->type->toArray(), $this->cluster->toArray());
 
         return $result;
     }
