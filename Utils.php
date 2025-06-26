@@ -14,13 +14,17 @@ class Utils {
      * @param mixed $ship - Array contenant les valeurs du bateau.
      * @return void
      */
-    public function predict($script, $ship) {
+    public function predict($script, $ship, int $ret = 0) {
         $file = 'assets/json/' . $ship['mmsi'] . ".json";
         $data = [];
         $data['bateau'] = $ship;
         $data['scriptStatus'] = 1; // Status de 1 indique que l'on attend une réponse.
 
         file_put_contents($file, json_encode($data));
-        shell_exec("python3 process.py " . $script . " " . $file . ' 2>&1');
+        $value = shell_exec("python3 process.py " . $script . " " . $file . ' ' . $ret . ' 2>&1');
+
+        if ($ret == 1) {
+            return $value;
+        }
     }
 }

@@ -11,8 +11,10 @@ require_once "dao/DaoShip.php";
 
 $daoShip = new DaoShip(DBHOST, DBNAME, PORT, USER, PASS);
 $utils = new Utils();
+$ship = $daoShip->getShips()[0];
 
-// $utils->predict('typeNavire', $ship->toArray());
+print_r($utils->predict('typeNavire', $ship->toArray(), 1));
+
 /////////////////////////////////////////
 
 

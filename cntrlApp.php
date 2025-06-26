@@ -28,6 +28,15 @@ class CntrlApp {
         $cog        = $_POST['cog'];
         $heading    = $_POST['heading'];
         $status     = $_POST['status'];
-        
+
+        $daoShip = new DaoShip(DBHOST, DBNAME, PORT, USER, PASS);
+        $ship = new Ship($mmsi, $vesselname, $imo, $length, $width, $draft, null, null);
+
+        // AI script to estimate ship type and cluster.
+        $utils = new Utils();
+
+        $utils->predict('typeNavire', $ship);
+
+        $daoShip->addShip($ship);
     }
 }

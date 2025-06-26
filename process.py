@@ -46,6 +46,7 @@ if __name__ == '__main__':
     # Récupération des arguments
     model = sys.argv[1]
     data_file = contextPath + sys.argv[2]
+    ret = sys.argv[3]
 
     # Ouverture du fichier .json
     with open(data_file, 'r') as f:
@@ -80,3 +81,6 @@ if __name__ == '__main__':
     # On remplace le fichier json par les nouvelles valeurs.
     with open(data_file, 'w') as f:
         json.dump(data, f, ensure_ascii=False, indent=4)
+    
+    if ret == '1':
+        print(json.dumps(data))
