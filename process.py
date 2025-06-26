@@ -3,6 +3,7 @@ import pickle
 import pandas as pd
 import json
 
+contextPath = "/var/www/projetweb_S6/"
 
 # Fonctionnalite 1 - Trouver le cluster associé.
 def cluster(raw_data):
@@ -10,7 +11,7 @@ def cluster(raw_data):
     data = raw_data[['LON', 'LAT', 'SOG']]
 
     # Puis on passe le tout par le modèle.
-    model_file = 'Besoin_client_1/cluster.pkl'
+    model_file = contextPath + 'assets/pkl/cluster.pkl'
     with open(model_file, 'rb') as file:
         model = pickle.load(file)
     return model.predict(data)
@@ -22,7 +23,7 @@ def type_navire(raw_data):
     data = raw_data[['Length', 'Width', 'Draft']]
 
     # Puis on passe le tout par le modèle.
-    model_file = 'Besoin_client_2/typeNavire.pkl'
+    model_file = contextPath + 'assets/pkl/typeNavire.pkl'
     with open(model_file, 'rb') as file:
         model = pickle.load(file)
     return model.predict(data)
@@ -34,7 +35,7 @@ def traj_navire(raw_data):
     data = raw_data[["SOG", "COG", "Heading", "VesselType", "delta_sec"]]
 
     # Puis on passe le tout par le modèle.
-    model_file = 'Besoin_client_3/trajNavire.pkl'
+    model_file = contextPath + 'assets/pkl/trajNavire.pkl'
     with open(model_file, 'rb') as file:
         model = pickle.load(file)
     return model.predict(data)
@@ -44,7 +45,8 @@ def traj_navire(raw_data):
 if __name__ == '__main__':
     # Récupération des arguments
     model = sys.argv[1]
-    data_file = sys.argv[2]
+    data_file = contextPath + sys.argv[2]
+    ret = sys.argv[3]
 
     # Ouverture du fichier .json
     with open(data_file, 'r') as f:
@@ -79,3 +81,6 @@ if __name__ == '__main__':
     # On remplace le fichier json par les nouvelles valeurs.
     with open(data_file, 'w') as f:
         json.dump(data, f, ensure_ascii=False, indent=4)
+    
+    if ret == '1':
+        print(json.dumps(data))

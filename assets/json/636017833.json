@@ -1,0 +1,22 @@
+{
+    "bateau": {
+        "mmsi": "636017833",
+        "vesselName": "STOLT LOTUS",
+        "imo": "9617648",
+        "Length": 183,
+        "Width": 28,
+        "Draft": 10,
+        "type": {
+            "type": 80,
+            "description": "Tanker"
+        },
+        "cluster": {
+            "num_cluster": 1,
+            "description": "test"
+        }
+    },
+    "scriptStatus": 0,
+    "result": [
+        2
+    ]
+}
