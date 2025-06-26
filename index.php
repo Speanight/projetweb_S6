@@ -11,14 +11,18 @@ $cntrlApp = new CntrlApp();
 
 switch ($method) {
     case "GET":
+        //Pages require
         if ($uri == "/accueil") require_once("pages/accueil.php");
         elseif($uri == "/boat") require_once("pages/boat.php");
-        elseif($uri == "/maps") $cntrlApp->getMapPage();
         elseif($uri == "/about") require_once("pages/about.php");
+
+        //AJAX request handle
+        elseif($uri == "/updatestatships") $cntrlApp->updateStatShips();
+        elseif($uri == "/obtainpositions") $cntrlApp->obtainPositions();
         elseif($uri == '/predicttrajectory') $cntrlApp->predictTrajectory();
+        elseif($uri == "/maps") $cntrlApp->getMapPage();
 
         elseif ($uri == "/info") phpinfo();
-        elseif ($uri == "/test")    require_once("pages/test.php");
         // else require_once("pages/accueil.php");
         break;
     

@@ -102,7 +102,6 @@ function ajaxRequest(type, url, callback, data = null, sendFile = false)
 
     document.body.appendChild(toast);
 
-    // Forcer un reflow pour que la transition prenne effet
     requestAnimationFrame(() => {
     toast.classList.remove("translate-y-10", "opacity-0");
     toast.classList.add("translate-y-0", "opacity-100");
