@@ -78,12 +78,13 @@ function ajaxRequest(type, url, callback, data = null, sendFile = false)
 
     const toast = document.createElement('div');
     toast.className = `
-      fixed z-[9999] right-4 bottom-4 
+      fixed z-[10] right-4 bottom-4 
       translate-y-10 opacity-0
       transition-all duration-300 ease-out
       flex items-center w-full max-w-xs p-4 mb-4 
       text-gray-400 ${msg.bgColor} rounded-lg shadow-sm
       pointer-events-auto
+      
     `.trim();
 
     toast.innerHTML = `

@@ -5,7 +5,7 @@ class Position {
     private ?int $id;
     private float $lat;
     private float $lon;
-    private int $timestamp;
+    private DateTime $timestamp;
     private float $sog;
     private float $cog;
     private float $heading;

@@ -45,10 +45,10 @@ class DaoPosition
         $statement->bindParam(":mmsi", $ship->get_mmsi());
         $statement->execute();
 
-        $positions = $statement->fetchAll();
+        $positions = $statement->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($positions as $p) {
-            $pos = new Position($p['id'], $p['lat'], $p['lon'], strtotime($p['timestamp']), $p['sog'], $p['cog'], $p['heading'], $p['status'], $ship);
+            $pos = new Position($p['id'], $p['lat'], $p['lon'], new DateTime($p['timestamp']), $p['sog'], $p['cog'], $p['heading'], $p['status'], $ship);
             array_push($result, $pos);
         }
 

@@ -158,3 +158,5 @@ document.getElementById("applyFilters").addEventListener("click", (event) =>{
     handlePositions();
 });
 handlePositions();
+
+
