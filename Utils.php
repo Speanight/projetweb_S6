@@ -23,8 +23,6 @@ class Utils {
         file_put_contents($file, json_encode($data));
         $value = shell_exec("python3 process.py " . $script . " " . $file . ' ' . $ret . ' 2>&1');
 
-        if ($ret == 1) {
-            return $value;
-        }
+        return $value;
     }
 }

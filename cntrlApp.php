@@ -35,7 +35,7 @@ class CntrlApp {
         // AI script to estimate ship type and cluster.
         $utils = new Utils();
 
-        $utils->predict('typeNavire', $ship);
+        $type = $utils->predict('typeNavire', $ship, '1');
 
         $daoShip->addShip($ship);
     }
