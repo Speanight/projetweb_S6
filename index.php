@@ -1,5 +1,10 @@
 <?php
-//ini_set('display_errors', 1);
+ini_set('display_errors', 1);
+
+
+// TODO: ALTER TABLE ship ALTER COLUMN mmsi TYPE VARCHAR(9);
+// TODO: description de type changé en tdescription pour éviter conflit!
+
 
 require_once "cntrlApp.php";
 require_once "Utils.php";
@@ -21,6 +26,7 @@ switch ($method) {
         elseif($uri == "/obtainpositions") $cntrlApp->obtainPositions();
         elseif($uri == '/predicttrajectory') $cntrlApp->predictTrajectory();
         elseif($uri == "/maps") $cntrlApp->getMapPage();
+        elseif($uri == '/get/nboats') $cntrlApp->getNThBoat();
 
         elseif ($uri == "/info") phpinfo();
         // else require_once("pages/accueil.php");

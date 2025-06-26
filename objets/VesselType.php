@@ -37,7 +37,7 @@ class VesselType {
     public function toArray() {
         $result = [];
         $result['type'] = $this->type;
-        $result['description'] = $this->description;
+        $result['tdescription'] = $this->description;
 
         return $result;
     }

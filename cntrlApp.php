@@ -73,16 +73,29 @@ class CntrlApp {
 
     public function getMapPage() {
         $daoPosition = new DaoPosition(DBHOST, DBNAME, PORT, USER, PASS);
-        $daoShip = new DaoShip(DBHOST, DBNAME, PORT, USER, PASS);
 
-        $ships = $daoShip->getShips();
-        $positions = [];
+        $positions = $daoPosition->getNPos(0, TABLE_AMOUNT);
 
-        foreach ($ships as $s) {
-            $positions[$s->get_mmsi()] = $daoPosition->getPositionsOfBoat($s);
-        }
+        $pageMax = ceil($daoPosition->getAmountPos() / TABLE_AMOUNT);
+        print_r($pageMax);
 
         require_once "pages/maps.php";
+    }
+
+    public function getNThBoat() {
+        $page = $_GET['page'];
+
+        $daoPosition = new DaoPosition(DBHOST, DBNAME, PORT, USER, PASS);
+
+        $positions = $daoPosition->getNPos(($page-1) * TABLE_AMOUNT, TABLE_AMOUNT);
+
+        $ret = [];
+
+        foreach ($positions as $p) {
+            array_push($ret, $p->toArrayFlat());
+        }
+
+        print_r(json_encode($ret));
     }
 
     public function predictTrajectory() {
@@ -93,7 +106,7 @@ class CntrlApp {
         $mmsi = $_GET['mmsi'];
 
         $daoPosition = new DaoPosition(DBHOST, DBNAME, PORT, USER, PASS);
-        $pos = $daoPosition->getPositionById($id);
+        $pos = $daoPosition->getPositionById((int) $id);
         // Conversion minutes to seconds:
         $delta_sec = $delta_sec * 60;
 
@@ -105,11 +118,8 @@ class CntrlApp {
 
         $utils->predict('trajNavire', $arr);
         $json = json_decode(file_get_contents('assets/json/' . $mmsi . '.json'));
-        // while ($json->{'scriptStatus'} == 1) {
-        //     $json = json_decode(file_get_contents('assets/json/' . $mmsi . '.json'));
-        // }
-        $result['LON'] = (int) $json->{'result'}[0];
-        $result['LAT'] = (int) $json->{'result'}[1];
+        $result['LON'] = (int) $json->{'result'}[0][0];
+        $result['LAT'] = (int) $json->{'result'}[0][1];
         $result['time'] = $delta_sec/60;
 
         print_r(json_encode($result));

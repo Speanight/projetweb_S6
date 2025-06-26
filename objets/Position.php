@@ -135,6 +135,7 @@ class Position {
         $result['LAT'] = $this->lat;
         $result['LON'] = $this->lon;
         $result['timestamp'] = $this->timestamp;
+        $result['humanTimestamp'] = $this->timestamp->format('d/m/Y H:i');
         $result['SOG'] = $this->sog;
         $result['COG'] = $this->cog;
         $result['Heading'] = $this->heading;

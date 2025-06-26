@@ -7,6 +7,8 @@ const PASS = "Isen44N";
 
 const SCRIPT_PATH = '/var/www/projetweb_S6/process.py';
 
+const TABLE_AMOUNT = 10;
+
 class Utils {
     /**
      * 
