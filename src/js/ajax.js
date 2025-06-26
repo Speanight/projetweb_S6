@@ -61,23 +61,20 @@ function ajaxRequest(type, url, callback, data = null, sendFile = false)
     success: {
     iconColor: 'text-green-200',
     bgColor: 'bg-green-800',
-    text: 'Item moved successfully.'
 },
     error: {
     iconColor: 'text-red-200',
     bgColor: 'bg-red-800',
-    text: 'Item has been deleted.'
 },
     warning: {
     iconColor: 'text-orange-200',
     bgColor: 'bg-orange-700',
-    text: 'Improve password difficulty.'
 }
 };
 
-    if (!messages[type]) return;
+    if (!messages[data.type]) return;
 
-    const msg = messages[type];
+    const msg = messages[data.type];
 
     const toast = document.createElement('div');
     toast.className = `
@@ -95,7 +92,7 @@ function ajaxRequest(type, url, callback, data = null, sendFile = false)
           <path d="${getIconPath(type)}" />
         </svg>
       </div>
-      <div class="ms-3 text-sm font-normal">${msg.text}</div>
+      <div class="ms-3 text-sm font-normal">${data.message}</div>
       <button type="button" class="ms-auto -mx-1.5 -my-1.5 ${msg.bgColor} text-gray-500 hover:text-white rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-700 inline-flex items-center justify-center h-8 w-8" aria-label="Close">
         <svg class="w-3 h-3" fill="none" viewBox="0 0 14 14">
           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
@@ -105,7 +102,6 @@ function ajaxRequest(type, url, callback, data = null, sendFile = false)
 
     document.body.appendChild(toast);
 
-    // Forcer un reflow pour que la transition prenne effet
     requestAnimationFrame(() => {
     toast.classList.remove("translate-y-10", "opacity-0");
     toast.classList.add("translate-y-0", "opacity-100");

@@ -110,9 +110,9 @@ class Ship {
         $result['mmsi']         = $this->mmsi;
         $result['vesselName']   = $this->vesselName;
         $result['imo']          = $this->imo;
-        $result['Length']       = $this->length;
-        $result['Width']        = $this->width;
-        $result['Draft']        = $this->draft;
+        $result['length']       = $this->length;
+        $result['width']        = $this->width;
+        $result['draft']        = $this->draft;
         if ($this->type == null)    $result['type']     = null;
         else                        $result['type']     = $this->type->toArray();
         if ($this->cluster == null) $result['cluster']  = null;

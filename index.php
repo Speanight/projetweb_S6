@@ -7,13 +7,6 @@ require_once "Utils.php";
 
 ///////////// TESTING ZONE ///////////////
 
-require_once "dao/DaoShip.php";
-
-$daoShip = new DaoShip(DBHOST, DBNAME, PORT, USER, PASS);
-$utils = new Utils();
-$ship = $daoShip->getShips()[0];
-
-print_r($utils->predict('typeNavire', $ship->toArray(), 1));
 
 /////////////////////////////////////////
 
@@ -25,10 +18,16 @@ $cntrlApp = new CntrlApp();
 
 switch ($method) {
     case "GET":
+        //Pages require
         if ($uri == "/accueil") require_once("pages/accueil.php");
-        if($uri == "/boat") require_once("pages/boat.php");
-        if($uri == "/maps") require_once("pages/maps.php");
-        if($uri == "/about") require_once("pages/about.php");
+        else if($uri == "/boat") require_once("pages/boat.php");
+        else if($uri == "/maps") require_once("pages/maps.php");
+        else if($uri == "/about") require_once("pages/about.php");
+
+        //AJAX request handle
+        else if($uri == "/updatestatships") $cntrlApp->updateStatShips();
+        else if($uri == "/obtainpositions") $cntrlApp->obtainPositions();
+
 
         elseif ($uri == "/info") phpinfo();
         else require_once("pages/accueil.php");

@@ -161,39 +161,10 @@
             <div class="w-full h-1 bg-purple-400 rounded"></div>
         </div>
     </div>
-
-    <div class="flex flex-col gap-4">
+    <!-- Ship widgets -->
+    <div id="shipContainer" class="flex flex-col gap-4">
         <h2 class="text-xl font-bold text-white">Latest Additions</h2>
 
-        <div class="relative w-full max-w-md h-44 rounded-2xl overflow-hidden shadow-xl mx-auto">
-            <img
-                    src="https://images.unsplash.com/photo-1607013251421-cf2a1f25b6fc?auto=format&fit=crop&w=800&q=80"
-                    alt="Boat top view"
-                    class="absolute inset-0 w-full h-full object-cover"
-            />
-
-            <!-- eff -->
-            <div class="absolute inset-0 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 flex items-center gap-4 text-white">
-                <img
-                        src="https://via.placeholder.com/56/ffffff/000000?text=🚢"
-                        class="w-14 h-14 rounded-md object-cover shadow-md"
-                        alt="Boat icon"
-                />
-
-                <div class="flex-1">
-                    <div class="flex items-center justify-between">
-                        <h2 class="text-lg font-bold drop-shadow">SEA BREEZE</h2>
-                        <span class="text-xs bg-blue-200/30 text-white px-2 py-1 rounded-full backdrop-blur-sm drop-shadow">Cruising</span>
-                    </div>
-                    <p class="text-sm text-gray-200 drop-shadow">MMSI 231458963</p>
-                    <div class="flex flex-wrap gap-2 mt-2 text-xs drop-shadow">
-                        <span class="bg-white/20 px-2.5 py-1 rounded-md">⚓ Width: 32</span>
-                        <span class="bg-white/20 px-2.5 py-1 rounded-md">📏 Length: 198</span>
-                        <span class="bg-white/20 px-2.5 py-1 rounded-md">🌊 Draft: 11</span>
-                    </div>
-                </div>
-            </div>
-        </div>
 
     </div>
 </div>

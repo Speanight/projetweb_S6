@@ -21,27 +21,27 @@ require_once("header.php");
                 <ul class="space-y-2 text-sm" aria-labelledby="dropdownDefault">
                     <li class="flex items-center">
                         <input id="passenger" type="checkbox"
-                               class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 focus:ring-2 dark:bg-gray-600" />
+                               class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 focus:ring-2 dark:bg-gray-600" value="60" />
                         <label for="passenger" class="ml-2 text-sm font-medium text-gray-900">
                             Passenger
                         </label>
                     </li>
                     <li class="flex items-center">
                         <input id="cargo" type="checkbox"
-                               class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 focus:ring-2" />
+                               class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 focus:ring-2" value = "70" />
                         <label for="cargo" class="ml-2 text-sm font-medium text-gray-900">
                             Cargo
                         </label>
                     </li>
                     <li class="flex items-center">
                         <input id="tanker" type="checkbox"
-                               class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 focus:ring-2" />
+                               class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 focus:ring-2" value = "80" />
                         <label for="tanker" class="ml-2 text-sm font-medium text-gray-900">
                             Tanker
                         </label>
                     </li>
                     <li>
-                        <input type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-1.5 w-full" placeholder="Search by MMSI" required />
+                        <input type="text" id="mmsi_filter" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-1.5 w-full" placeholder="Search by MMSI" required />
                     </li>
                     <li class="hidden">
                         <p>45</p>
@@ -49,7 +49,7 @@ require_once("header.php");
                 </ul>
             </div>
 
-            <button type="button"
+            <button id="applyFilters" type="button"
                     class="text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 font-small rounded-lg text-sm px-5 py-2.5 text-center">
                 Apply Filters
             </button>
