@@ -9,6 +9,7 @@ switch ($method) {
         if ($uri == "/accueil") require_once("pages/accueil.php");
         if($uri == "/boat") require_once("pages/boat.php");
         if($uri == "/maps") require_once("pages/maps.php");
+        if($uri == "/about") require_once("pages/about.php");
 
         else require_once("pages/accueil.php");
         break;
