@@ -116,7 +116,7 @@
                             </button>
                             </li>
                             <p class="text-base font-medium text-dark ">
-                            Page <span id="pageNumber">1</span> to <span id="pageLimit"><?=$pageMax?></span>
+                            Page <input type="text" id="pageNumber" class="inline-flex w-[50px] content-end text-right" value="1" max="<?=$pageMax?>"/> to <span id="pageLimit"><?=$pageMax?></span>
                             </p>
                             <li>
                             <button id="next-page"

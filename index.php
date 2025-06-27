@@ -26,6 +26,9 @@ switch ($method) {
 
         elseif ($uri == "/info") phpinfo();
         // else require_once("pages/accueil.php");
+
+
+        if ($uri == "/updateClusters") $cntrlApp->updateClusters();
         break;
     
     case "POST":

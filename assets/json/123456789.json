@@ -1,0 +1,27 @@
+{
+    "bateau": {
+        "id": null,
+        "LAT": 42,
+        "LON": -71,
+        "timestamp": {
+            "date": "2025-06-27 11:36:00.000000",
+            "timezone_type": 3,
+            "timezone": "UTC"
+        },
+        "humanTimestamp": "27/06/2025 11:36",
+        "SOG": 12.5,
+        "COG": 85.3,
+        "Heading": 90,
+        "status": 1,
+        "mmsi": "123456789",
+        "vesselName": "Titanic",
+        "imo": "xxxxxxx",
+        "Length": 100,
+        "Width": 20,
+        "Draft": 6.5
+    },
+    "scriptStatus": 0,
+    "result": [
+        70
+    ]
+}

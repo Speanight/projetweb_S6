@@ -16,8 +16,9 @@ class Utils {
      * @param mixed $ship - Array contenant les valeurs du bateau.
      * @return void
      */
-    public function predict($script, $ship, int $ret = 0) {
-        $file = 'assets/json/' . $ship['mmsi'] . ".json";
+    public function predict($script, $ship, int $ret = 0, string $filePath = null) {
+        if ($filePath == null) $filePath = $ship['mmsi'];
+        $file = 'assets/json/' . $filePath . ".json";
         $data = [];
         $data['bateau'] = $ship;
         $data['scriptStatus'] = 1; // Status de 1 indique que l'on attend une réponse.

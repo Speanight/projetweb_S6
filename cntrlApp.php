@@ -28,7 +28,7 @@ class CntrlApp {
         // Position
         $lat        = $_POST['lat'];
         $lon        = $_POST['lon'];
-        $timestamp  = strtotime($_POST['timestamp']);
+        $timestamp  = new DateTime($_POST['timestamp']);
         $sog        = $_POST['sog'];
         $cog        = $_POST['cog'];
         $heading    = $_POST['heading'];
@@ -49,9 +49,7 @@ class CntrlApp {
         $json = json_decode(file_get_contents('assets/json/' . $mmsi . '.json'));
         $type = $daoType->getType((int) $json->{'result'}[0]);
 
-        $utils->predict('Cluster', $pos->toArrayFlat(), '0');
-        $json = json_decode(file_get_contents('assets/json/' . $mmsi . '.json'));
-        $cluster = $daoCluster->getCluster((int) $json->{'result'}[0]);
+        $cluster = $daoCluster->getCluster(8);
 
         if ($type == null || $cluster == null) {
             $result['type'] = 'error';
@@ -210,8 +208,38 @@ class CntrlApp {
     }
 
     public function updateClusters(){
-        die();
-        //TODO Make the functions to recalculate clusters
+        $daoPosition = new DaoPosition(DBHOST, DBNAME, PORT, USER, PASS);
+        $daoShip = new DaoShip(DBHOST, DBNAME, PORT, USER, PASS);
+        $daoType = new DaoVesselType(DBHOST, DBNAME, PORT, USER, PASS);
+        $daoCluster = new DaoCluster(DBHOST, DBNAME, PORT, USER, PASS);
+        $utils = new Utils();
+
+        $amount = $daoShip->getAmountOfShips();
+
+        // TODO: remplacer 100 par $amount.
+        $positions = $daoPosition->getPos($amount, "", true);
+        $utils->predict('Cluster', $positions, '0', 'clusters');
+
+        $file = json_decode(file_get_contents('assets/json/clusters.json'), true);
+        $result = $file['result'];
+
+        // print_r($file['bateau']);
+
+        $i = 0;
+        foreach ($file['bateau'] as $b) {
+            $cluster = $daoCluster->getCluster($result[$i]);
+            $ship = new Ship($b['mmsi'], $b['vesselName'], $b['imo'], $b['Length'], $b['Width'], $b['Draft'], null, $cluster);
+            $daoShip->updateCluster($ship);
+
+            $i++;
+        }
+
+        $result = [];
+        $result['type'] = 'success';
+        $result['message'] = 'Clusters have been successfully updated!';
+
+        print_r(json_encode($result));
+
     }
 
     public function obtainAllMMSI(): void
