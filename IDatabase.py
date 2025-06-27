@@ -1,8 +1,10 @@
 import psycopg2
 import pandas as pd
 
+print("Lecture du fichier csv...")
 data = pd.read_csv('assets/vessel-total-nettoye.csv', index_col=0)
 
+print("Connexion à la base de données...")
 #Establishing the connection
 conn = psycopg2.connect(
    database="titanisen", user='postgres', password='Isen44N', host='127.0.0.1', port= '5432'
@@ -14,6 +16,7 @@ conn.autocommit = True
 #Creating a cursor object using the cursor() method
 cursor = conn.cursor()
 
+print("Ajout des données...")
 for i in data.iloc:
    mmsi = str(i['MMSI'])
    datetime = str(i['BaseDateTime'])
@@ -38,6 +41,7 @@ for i in data.iloc:
    cursor.execute('''INSERT INTO position (lat, lon, timestamp, sog, cog, heading, status, mmsi)
                      VALUES (%s, %s, %s, %s, %s, %s, %s, %s)''', (lat, lon, datetime, sog, cog, heading, status, mmsi));
 
+print("Commit des changements...")
 conn.commit()
 conn.close()
-print("Records inserted........")
+print("Exécution terminée !")

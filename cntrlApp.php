@@ -77,7 +77,6 @@ class CntrlApp {
         $positions = $daoPosition->getNPos(0, TABLE_AMOUNT);
 
         $pageMax = ceil($daoPosition->getAmountPos() / TABLE_AMOUNT);
-        print_r($pageMax);
 
         require_once "pages/maps.php";
     }
@@ -171,7 +170,7 @@ class CntrlApp {
     public function obtainPositions(){
         $daoPosition = new DaoPosition(DBHOST, DBNAME, PORT, USER, PASS);
         if(empty($_GET)){ //no filters
-            $positions = $daoPosition->getPos(100);
+            $positions = $daoPosition->getPos(40000);
             print_r(json_encode($positions));
         }
         else{ //format filter string

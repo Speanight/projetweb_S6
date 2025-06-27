@@ -88,10 +88,10 @@
                             </th>
                         </tr>
                         </thead>
-                        <tbody id="tableContent">                        </tbody>
+                        <tbody id="tableContent"></tbody>
                     </table>
 
-                    <div class="bg-white py-10 text-center ">
+                    <div class="bg-gray-700 text-gray-400 py-2 text-center ">
                         <div>
                         <ul class="mx-auto flex w-full max-w-[415px] items-center justify-between">
                             <li>

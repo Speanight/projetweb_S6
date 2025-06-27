@@ -1,11 +1,6 @@
 <?php
 ini_set('display_errors', 1);
 
-
-// TODO: ALTER TABLE ship ALTER COLUMN mmsi TYPE VARCHAR(9);
-// TODO: description de type changé en tdescription pour éviter conflit!
-
-
 require_once "cntrlApp.php";
 require_once "Utils.php";
 
