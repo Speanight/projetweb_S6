@@ -168,9 +168,10 @@ class CntrlApp {
     }
 
     public function obtainPositions(){
+        $n = 40000;
         $daoPosition = new DaoPosition(DBHOST, DBNAME, PORT, USER, PASS);
         if(empty($_GET)){ //no filters
-            $positions = $daoPosition->getPos(40000);
+            $positions = $daoPosition->getPos($n);
             print_r(json_encode($positions));
         }
         else{ //format filter string
@@ -202,7 +203,7 @@ class CntrlApp {
             if (!empty($filters)) {
                 $fs = 'WHERE ' . implode(' AND ', $filters);
             }
-            $positions = $daoPosition->getPos(100, $fs);
+            $positions = $daoPosition->getPos($n, $fs);
             print_r(json_encode($positions));
 
         }

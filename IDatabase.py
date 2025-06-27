@@ -17,6 +17,10 @@ conn.autocommit = True
 cursor = conn.cursor()
 
 print("Ajout des données...")
+cursor.execute('''INSERT INTO vesseltype (type, description) VALUES (60, 'Passenger') ON CONFLICT (type) DO NOTHING''')
+cursor.execute('''INSERT INTO vesseltype (type, description) VALUES (70, 'Cargo') ON CONFLICT (type) DO NOTHING''')
+cursor.execute('''INSERT INTO vesseltype (type, description) VALUES (80, 'Tanker') ON CONFLICT (type) DO NOTHING''')
+
 for i in data.iloc:
    mmsi = str(i['MMSI'])
    datetime = str(i['BaseDateTime'])
