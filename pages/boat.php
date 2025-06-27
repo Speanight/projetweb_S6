@@ -137,11 +137,13 @@
                                     <p class="text-sm text-gray-500 font-medium">Ships tracked</p>
                                     <p id="numShipsTracked" class="text-2xl font-bold">795</p>
                                 </div>
+                                <!--
                                 <div class="text-sm text-red-500 font-semibold flex items-center gap-1">
                                     <span>1.39%</span>
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"
                                         viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
                                 </div>
+                                -->
                             </div>
                             <div class="w-full h-1 bg-orange-400 rounded"></div>
                         </div>
@@ -153,18 +155,20 @@
                                     <p class="text-sm text-gray-500 font-medium">Ships docked</p>
                                     <p id="numShipsDocked" class="text-2xl font-bold">573</p>
                                 </div>
+                                <!--
                                 <div class="text-sm text-green-600 font-semibold flex items-center gap-1">
                                     <span>2.69%</span>
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"
                                         viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" /></svg>
                                 </div>
+                                -->
                             </div>
                             <div class="w-full h-1 bg-purple-400 rounded"></div>
                         </div>
                     </div>
 
                     <div id="shipContainer" class="flex flex-col gap-4">
-                        <h2 class="text-xl font-bold text-white">Latest Additions</h2>
+                        <h2 class="text-xl font-bold text-white">Discover some ships !</h2>
 
                     </div>
                 </div>

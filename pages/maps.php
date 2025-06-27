@@ -43,7 +43,10 @@
                                     </label>
                                 </li>
                                 <li>
-                                    <input type="text" id="mmsi_filter" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-1.5 w-full" placeholder="Search by MMSI" required />
+                                    <input list="listMMSI" type="text" id="mmsi_filter" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-1.5 w-full" placeholder="Search by MMSI" required />
+                                    <datalist id="listMMSI">
+                                        <option>AZERTY</option>
+                                    </datalist>
                                 </li>
                                 <li class="hidden">
                                     <p>45</p>
@@ -54,6 +57,11 @@
                         <button id="applyFilters" type="button"
                                 class="text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 font-small rounded-lg text-sm px-5 py-2.5 text-center">
                             Apply Filters
+                        </button>
+
+                        <button id="refreshClusters" type="button"
+                                class="text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 font-small rounded-lg text-sm px-5 py-2.5 text-center">
+                            Refresh clusters
                         </button>
                     </div>
 

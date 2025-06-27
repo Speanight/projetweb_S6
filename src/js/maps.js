@@ -1,7 +1,15 @@
-function getColor(index) {
-    const colors = ["red", "blue", "green", "orange", "purple", "brown"];
-    return colors[index % colors.length];
-}
+colorsCluster = {
+    0 : "#BC4B51",
+    1 : "#5B8E7D",
+    2 : "#F4A259",
+    3 : "#8CB369",
+    4 : "#5B2E48",
+    5 : "#2274A5",
+    6 : "#131B23",
+    7 : "#BBD686",
+    8 : "#C2A83E"
+};
+
 function displayMap(ships){
     const traces = ships.map(ship => ({
         type: "scattermapbox",
@@ -31,8 +39,6 @@ function displayMap(ships){
         handlerNotification({type: "error", message: "No entry found with the specified criterias"})
         document.getElementById("map").innerHTML = "";
     }
-
-
 }
 
 function handlePositions(){
@@ -65,18 +71,20 @@ function handlePositions(){
     console.log("data:", data);
 
     ajaxRequest('GET', '/obtainpositions', function(positions) {
-        console.log("in call back handlePositions");
+       console.log(positions);
         const grouped = {};
         positions.forEach(entry => {
             const { lat, lon, ship } = entry;
-            const { mmsi, vesselName } = ship;
+            const { mmsi, vesselName, cluster } = ship;
+            const num_cluster = cluster.num_cluster;
 
             if (!grouped[mmsi]) {
                 grouped[mmsi] = {
                     name: vesselName,
                     mmsi: mmsi,
                     lats: [],
-                    lons: []
+                    lons: [],
+                    num_cluster: num_cluster // Ajout ici
                 };
             }
 
@@ -85,11 +93,21 @@ function handlePositions(){
         });
         const ships = Object.values(grouped).map((ship, index) => ({
             ...ship,
-            color: getColor(index)
+            color: colorsCluster[ship.num_cluster]
         }));
         console.log(ships);
         displayMap(ships);
     }, data);
+}
+
+function getAllMMSI(){
+    ajaxRequest("GET", "/mmsi", (data) => {
+        let mmsi = data.map((obj) => obj.mmsi);
+        let target = document.getElementById("listMMSI");
+        mmsi.forEach((m) => {
+            target.insertAdjacentHTML("beforeend", `<option>${m}</option>`);
+        });
+    });
 }
 
 //------------------------------------------------------------------------------
@@ -153,10 +171,22 @@ document.querySelectorAll('.change-type').forEach(item => {
     })
 })
 
+//Display the map again by taking account of the eventual filters
 document.getElementById("applyFilters").addEventListener("click", (event) =>{
     event.preventDefault();
     handlePositions();
 });
+
+//Update cluster on button refresh
+document.getElementById("refreshClusters").addEventListener("click", (event) => {
+    event.preventDefault();
+    handlerNotification({type: "warning", message: "Refreshing clustering, this might take a while..."});
+    ajaxRequest("PUT", "/updateClusters", function (response) {
+        handlePositions();
+        handlerNotification(response);
+    });
+});
 handlePositions();
+getAllMMSI();
 
 

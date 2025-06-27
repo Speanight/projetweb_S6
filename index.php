@@ -21,6 +21,7 @@ switch ($method) {
         elseif($uri == "/obtainpositions") $cntrlApp->obtainPositions();
         elseif($uri == '/predicttrajectory') $cntrlApp->predictTrajectory();
         elseif($uri == "/maps") $cntrlApp->getMapPage();
+        elseif($uri == "/mmsi") $cntrlApp->obtainAllMMSI();
 
         elseif ($uri == "/info") phpinfo();
         // else require_once("pages/accueil.php");
@@ -32,6 +33,7 @@ switch ($method) {
         
         case "PUT":
             if ($uri == "/edit/vesseltype") $cntrlApp->editVesselType();
+            else if ($uri == "/updateClusters") $cntrlApp->updateClusters();
         break;
     
     case "DELETE":

@@ -197,6 +197,16 @@ class CntrlApp {
             print_r(json_encode($positions));
 
         }
+    }
 
+    public function updateClusters(){
+        die();
+        //TODO Make the functions to recalculate clusters
+    }
+
+    public function obtainAllMMSI(): void
+    {
+        $daoShip = new DaoShip(DBHOST, DBNAME, PORT, USER, PASS);
+        print_r(json_encode($daoShip->getAllMMSI()));
     }
 }

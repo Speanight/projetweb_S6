@@ -166,4 +166,11 @@ class DaoShip {
         $statement->bindParam(":mmsi", $ship->get_mmsi());
         $statement->execute();
     }
+
+    public function getAllMMSI(){
+        $statement = $this->db->prepare("SELECT DISTINCT ship.mmsi FROM ship");
+        $statement->execute();
+
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
