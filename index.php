@@ -1,5 +1,5 @@
 <?php
-//ini_set('display_errors', 1);
+ini_set('display_errors', 1);
 
 require_once "cntrlApp.php";
 require_once "Utils.php";
@@ -22,6 +22,7 @@ switch ($method) {
         elseif($uri == '/predicttrajectory') $cntrlApp->predictTrajectory();
         elseif($uri == "/maps") $cntrlApp->getMapPage();
         elseif($uri == "/mmsi") $cntrlApp->obtainAllMMSI();
+        elseif($uri == '/get/nboats') $cntrlApp->getNThBoat();
 
         elseif ($uri == "/info") phpinfo();
         // else require_once("pages/accueil.php");

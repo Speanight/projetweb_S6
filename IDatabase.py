@@ -1,8 +1,10 @@
 import psycopg2
 import pandas as pd
 
+print("Lecture du fichier csv...")
 data = pd.read_csv('assets/vessel-total-nettoye.csv', index_col=0)
 
+print("Connexion à la base de données...")
 #Establishing the connection
 conn = psycopg2.connect(
    database="titanisen", user='postgres', password='Isen44N', host='127.0.0.1', port= '5432'
@@ -14,45 +16,32 @@ conn.autocommit = True
 #Creating a cursor object using the cursor() method
 cursor = conn.cursor()
 
-for i in raw_data.iloc:
-  print(i)
-  mmsi = str(i['MMSI'])
-  datetime = str(i['BaseDateTime'])
-  lat = str(i['LAT'])
-  lon = str(i['LON'])
-  sog = str(i['SOG'])
-  cog = str(i['COG'])
-  heading = str(i['Heading'])
-  vesselname = str(i['VesselName'])
-  imo = str(i['IMO'])
-  vesseltype = str(i['VesselType'])
-  status = str(i['Status'])
-  length = str(i['Length'])
-  width = str(i['Width'])
-  draft = str(i['Draft'])
+print("Ajout des données...")
+for i in data.iloc:
+   mmsi = str(i['MMSI'])
+   datetime = str(i['BaseDateTime'])
+   lat = str(i['LAT'])
+   lon = str(i['LON'])
+   sog = str(i['SOG'])
+   cog = str(i['COG'])
+   heading = str(i['Heading'])
+   vesselname = str(i['VesselName'])
+   imo = str(i['IMO'])[4:]
+   vesseltype = str(i['VesselType'])[:1] + '0'
+   status = str(i['Status'])
+   length = str(i['Length'])
+   width = str(i['Width'])
+   draft = str(i['Draft'])
+   cluster = 0
 
-  cursor.execute('''INSERT INTO ship (mmsi, vesselname, imo, length, width, draft, type, num_cluster)
-                    VALUES (${mmsi}, ${vesselname}, ${imo}, ${length}, ${width}, ${draft}, ${vesseltype}, ${})''')
+   cursor.execute('''INSERT INTO ship (mmsi, vesselname, imo, length, width, draft, type, num_cluster)
+                     VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+                     ON CONFLICT (mmsi) DO NOTHING''', (mmsi, vesselname, imo, length, width, draft, vesseltype, cluster))
 
+   cursor.execute('''INSERT INTO position (lat, lon, timestamp, sog, cog, heading, status, mmsi)
+                     VALUES (%s, %s, %s, %s, %s, %s, %s, %s)''', (lat, lon, datetime, sog, cog, heading, status, mmsi));
+
+print("Commit des changements...")
 conn.commit()
 conn.close()
-
-
-# Preparing SQL queries to INSERT a record into the database.
-cursor.execute('''INSERT INTO EMPLOYEE(FIRST_NAME, LAST_NAME, AGE, SEX,
-   INCOME) VALUES ('Ramya', 'Rama priya', 27, 'F', 9000)''')
-cursor.execute('''INSERT INTO EMPLOYEE(FIRST_NAME, LAST_NAME, AGE, SEX,
-   INCOME) VALUES ('Vinay', 'Battacharya', 20, 'M', 6000)''')
-cursor.execute('''INSERT INTO EMPLOYEE(FIRST_NAME, LAST_NAME, AGE, SEX,
-   INCOME) VALUES ('Sharukh', 'Sheik', 25, 'M', 8300)''')
-cursor.execute('''INSERT INTO EMPLOYEE(FIRST_NAME, LAST_NAME, AGE, SEX,
-   INCOME) VALUES ('Sarmista', 'Sharma', 26, 'F', 10000)''')
-cursor.execute('''INSERT INTO EMPLOYEE(FIRST_NAME, LAST_NAME, AGE, SEX,
-   INCOME) VALUES ('Tripthi', 'Mishra', 24, 'F', 6000)''')
-
-# Commit your changes in the database
-conn.commit()
-print("Records inserted........")
-
-# Closing the connection
-conn.close()
+print("Exécution terminée !")

@@ -64,7 +64,7 @@ class DaoPosition
         $daoShip = new DaoShip(DBHOST, DBNAME, PORT, USER, PASS);
         $ship = $daoShip->getShipByMMSI($p['mmsi']);
 
-        $pos = new Position($p['id'], $p['lat'], $p['lon'], strtotime($p['timestamp']), $p['sog'], $p['cog'], $p['heading'], $p['status'], $ship);
+        $pos = new Position($p['id'], $p['lat'], $p['lon'], new DateTime($p['timestamp']), $p['sog'], $p['cog'], $p['heading'], $p['status'], $ship);
 
         return $pos;
     }
@@ -72,6 +72,34 @@ class DaoPosition
         $statement = $this->db->prepare("SELECT * FROM position WHERE mmsi = ? LIMIT 1");
         $statement->execute([$mmsi]);
         return $statement->fetch();
+    }
+
+    public function getAmountPos() {
+        $statement = $this->db->prepare("SELECT COUNT(*) FROM position");
+        $statement->execute();
+        $value = $statement->fetch();
+
+        return (int) $value['count'];
+    }
+
+    public function getNPos(int $start = 0, int $amount = 20) {
+        $result = [];
+        $statement = $this->db->prepare("SELECT * FROM position LIMIT :lim OFFSET :off");
+        $statement->bindParam(":lim", $amount);
+        $statement->bindParam(":off", $start);
+        $statement->execute();
+
+        $positions = $statement->fetchAll();
+
+        $daoShip = new DaoShip(DBHOST, DBNAME, PORT, USER, PASS);
+
+        foreach ($positions as $p) {
+            $ship = $daoShip->getShipByMMSI($p['mmsi']);
+            $pos = new Position($p['id'], $p['lat'], $p['lon'], new DateTime($p['timestamp']), $p['sog'], $p['cog'], $p['heading'], $p['status'], $ship);
+            array_push($result, $pos);
+        }
+
+        return $result;
     }
 
     public function getPos(?int $n = 100, string $filterString = ""): array {
