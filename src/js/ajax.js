@@ -67,8 +67,8 @@ function ajaxRequest(type, url, callback, data = null, sendFile = false)
     bgColor: 'bg-red-800',
 },
     warning: {
-    iconColor: 'text-orange-200',
-    bgColor: 'bg-orange-700',
+    iconColor: 'text-blue-200',
+    bgColor: 'bg-[#D0F0FD]',
 }
 };
 
@@ -78,13 +78,12 @@ function ajaxRequest(type, url, callback, data = null, sendFile = false)
 
     const toast = document.createElement('div');
     toast.className = `
-      fixed z-[10] right-4 bottom-4 
+      fixed z-[10] right-4 top-4 
       translate-y-10 opacity-0
       transition-all duration-300 ease-out
       flex items-center w-full max-w-xs p-4 mb-4 
       text-gray-400 ${msg.bgColor} rounded-lg shadow-sm
       pointer-events-auto
-      
     `.trim();
 
     toast.innerHTML = `
@@ -108,8 +107,7 @@ function ajaxRequest(type, url, callback, data = null, sendFile = false)
     toast.classList.add("translate-y-0", "opacity-100");
 });
 
-    const timeout = setTimeout(() => hideToast(), 5000);
-
+    const timeout = setTimeout(() => hideToast(), 4000);
     function hideToast() {
     toast.classList.remove("translate-y-0", "opacity-100");
     toast.classList.add("translate-y-10", "opacity-0");

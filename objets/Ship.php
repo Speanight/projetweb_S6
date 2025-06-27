@@ -129,7 +129,8 @@ class Ship {
         $result['Length']       = $this->length;
         $result['Width']        = $this->width;
         $result['Draft']        = $this->draft;
-        $result = array_merge($result, $this->type->toArray(), $this->cluster->toArray());
+        if ($this->type != null) $result = array_merge($result, $this->type->toArray());
+        if ($this->cluster != null) $result = array_merge($result, $this->cluster->toArray());
 
         return $result;
     }
