@@ -132,6 +132,13 @@ class DaoShip {
         return $statement->execute();
     }
 
+    public function updateCluster(Ship $ship) {
+        $statement = $this->db->prepare("UPDATE ship SET num_cluster = :clust WHERE mmsi = :mmsi");
+        $statement->bindParam(":clust", $ship->get_cluster()->get_num_cluster());
+        $statement->bindParam(":mmsi", $ship->get_mmsi());
+        $statement->execute();
+    }
+
     public function getFilteredBoats(?int $type = null, ?string $mmsi = null) {
         $result = [];
         $query = "SELECT * FROM ship";

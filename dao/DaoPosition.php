@@ -102,7 +102,7 @@ class DaoPosition
         return $result;
     }
 
-    public function getPos(?int $n = 100, string $filterString = ""): array {
+    public function getPos(?int $n = 100, string $filterString = "", bool $flatArray = false): array {
         $arr = [];
         $daoCluster = new DaoCluster(DBHOST, DBNAME, PORT, USER, PASS);
         $daoVessel = new DaoVesselType(DBHOST, DBNAME, PORT, USER, PASS);
@@ -122,7 +122,8 @@ class DaoPosition
             $type = $daoVessel->getType($l['type']);
             $ship = new Ship($l['mmsi'], $l['vesselname'], $l['imo'], $l['length'], $l['width'], $l['draft'], $type, $cluster);
             $pos = new Position($l['id'], $l['lat'], $l['lon'], new DateTime($l['timestamp']), $l['sog'], $l['cog'], $l['heading'], $l['status'], $ship);
-            $arr[] = $pos->toArray();
+            if ($flatArray) $arr[] = $pos->toArrayFlat();
+            else            $arr[] = $pos->toArray();
         }
         return $arr;
     }

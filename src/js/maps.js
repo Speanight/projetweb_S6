@@ -197,10 +197,18 @@ getAllMMSI();
 //////////////////////////////////////////
 var page = 1;
 
+document.querySelector("#pageNumber").addEventListener('change', (event) => {
+    page = event.target.value;
+
+    const data = new URLSearchParams({page});
+
+    ajaxRequest('GET', '/get/nboats', updateTable, data);
+})
+
 document.querySelector("#previous-page").addEventListener('click', (event) => {
     if (page > 1) {
         page -= 1;
-        document.getElementById("pageNumber").innerHTML = page;
+        document.getElementById("pageNumber").value = page;
 
         const data = new URLSearchParams({page})
 
@@ -211,7 +219,7 @@ document.querySelector("#previous-page").addEventListener('click', (event) => {
 document.querySelector("#next-page").addEventListener('click', (event) => {
     if (page < document.getElementById('pageLimit').innerHTML) {
         page += 1;
-        document.getElementById("pageNumber").innerHTML = page;
+        document.getElementById("pageNumber").value = page;
 
         const data = new URLSearchParams({page});
 

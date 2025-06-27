@@ -1,0 +1,36 @@
+{
+    "bateau": {
+        "id": 284797,
+        "LAT": 28.67645,
+        "LON": -94.7854,
+        "timestamp": {
+            "date": "2023-05-29 11:51:16.000000",
+            "timezone_type": 3,
+            "timezone": "UTC"
+        },
+        "humanTimestamp": "29/05/2023 11:51",
+        "SOG": 0,
+        "COG": 0,
+        "Heading": 77,
+        "status": 1,
+        "mmsi": "636091186",
+        "vesselName": "HAMBURG STAR",
+        "imo": "298325 ",
+        "Length": 228,
+        "Width": 32,
+        "Draft": 14.4,
+        "type": 80,
+        "tdescription": "Tanker",
+        "num_cluster": 1,
+        "description": "Cluster one",
+        "delta_sec": 300,
+        "VesselType": 80
+    },
+    "scriptStatus": 0,
+    "result": [
+        [
+            28.197542799999994,
+            -95.97089119999997
+        ]
+    ]
+}

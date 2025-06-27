@@ -54,24 +54,37 @@ if __name__ == '__main__':
 
     # Récupération des données en lien avec le bateau
     boat_data = pd.DataFrame()
-    j = 0
-    for i in data['bateau']:
-        boat_data.insert(j, i, [data['bateau'][i]])
-        j += 1
+    # j = 0
+    # for i in data['bateau']:
+    #     boat_data.insert(j, i, [data['bateau'][i]])
+    #     j += 1
 
 
     # Switch-case selon la fonction souhaitée
     match model:
         case 'typeNavire':
+            j = 0
+            for i in data['bateau']:
+                boat_data.insert(j, i, [data['bateau'][i]])
+                j += 1
+
             data['result'] = type_navire(boat_data).tolist()
             data['result'][0] = data['result'][0] * 10 + 60
             # On indique que l'on a obtenu un résultat
             data['scriptStatus'] = 0
         case 'Cluster':
+            j = 0
+            for i in data['bateau']:
+                boat_data = pd.DataFrame(data['bateau'])
             data['result'] = cluster(boat_data).tolist()
             # On indique que l'on a obtenu un résultat
             data['scriptStatus'] = 0
         case 'trajNavire':
+            j = 0
+            for i in data['bateau']:
+                boat_data.insert(j, i, [data['bateau'][i]])
+                j += 1
+
             data['result'] = traj_navire(boat_data).tolist()
             # On indique que l'on a obtenu un résultat
             data['scriptStatus'] = 0
