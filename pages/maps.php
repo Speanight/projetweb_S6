@@ -22,21 +22,21 @@
                             </h6>
                             <ul class="space-y-2 text-sm" aria-labelledby="dropdownDefault">
                                 <li class="flex items-center">
-                                    <input id="passenger" type="checkbox"
+                                    <input value="60" id="passenger" type="checkbox"
                                         class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 focus:ring-2 dark:bg-gray-600" />
                                     <label for="passenger" class="ml-2 text-sm font-medium text-gray-900">
                                         Passenger
                                     </label>
                                 </li>
                                 <li class="flex items-center">
-                                    <input id="cargo" type="checkbox"
+                                    <input value="70" id="cargo" type="checkbox"
                                         class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 focus:ring-2" />
                                     <label for="cargo" class="ml-2 text-sm font-medium text-gray-900">
                                         Cargo
                                     </label>
                                 </li>
                                 <li class="flex items-center">
-                                    <input id="tanker" type="checkbox"
+                                    <input value="80" id="tanker" type="checkbox"
                                         class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 focus:ring-2" />
                                     <label for="tanker" class="ml-2 text-sm font-medium text-gray-900">
                                         Tanker

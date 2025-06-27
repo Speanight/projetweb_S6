@@ -1,0 +1,27 @@
+{
+    "bateau": {
+        "id": null,
+        "LAT": 90,
+        "LON": 60,
+        "timestamp": {
+            "date": "2025-06-27 12:17:00.000000",
+            "timezone_type": 3,
+            "timezone": "UTC"
+        },
+        "humanTimestamp": "27/06/2025 12:17",
+        "SOG": 17,
+        "COG": 90,
+        "Heading": 79,
+        "status": 1,
+        "mmsi": "928394034",
+        "vesselName": "Boatastic",
+        "imo": "xxxxxxx",
+        "Length": 50,
+        "Width": 3,
+        "Draft": 4
+    },
+    "scriptStatus": 0,
+    "result": [
+        70
+    ]
+}

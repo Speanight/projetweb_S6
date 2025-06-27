@@ -44,12 +44,6 @@
                     About our Project
                   </a>
                 </li>
-                <li>
-                  <a href="javascript:void(0)"
-                    class="flex py-2 text-base font-medium text-body-color hover:text-dark lg:ml-12 lg:inline-flex">
-                    <input type="search" placeholder ="	&#x1F50D Search" class="border rounded-lg px-2 py-1 bg-[#1B44C8]/30">
-                  </a>
-                </li>
                 </div>
               </ul>
             </nav>

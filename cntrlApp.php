@@ -59,7 +59,7 @@ class CntrlApp {
             $ship->set_type($type);
             $ship->set_cluster($cluster);
 
-            print_r($type);
+            // print_r($type);
     
             $daoShip->addShip($ship);
         }
@@ -166,7 +166,7 @@ class CntrlApp {
     }
 
     public function obtainPositions(){
-        $n = 40000;
+        $n = 20000;
         $daoPosition = new DaoPosition(DBHOST, DBNAME, PORT, USER, PASS);
         if(empty($_GET)){ //no filters
             $positions = $daoPosition->getPos($n);
