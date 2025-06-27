@@ -98,7 +98,7 @@ class DaoShip {
 
     public function getDockedShip() {
         $result = [];
-        $statement = $this->db->prepare("SELECT * FROM ship INNER JOIN position ON ship.mmsi = position.mmsi WHERE status = 1");
+        $statement = $this->db->prepare("SELECT DISTINCT ON(position.mmsi) * FROM position INNER JOIN ship ON ship.mmsi = position.mmsi WHERE status = 1");
         $statement->execute();
 
         $ships = $statement->fetchAll();

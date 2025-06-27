@@ -247,10 +247,10 @@ function updateTable(response) {
             <td class="px-6 py-4">${pos.humanTimestamp}</td>
             <td class="px-6 py-4">${pos.mmsi}</td>
             <td class="px-6 py-4">
-                ${pos.LAT} / ${pos.LON}
+                ${pos.LAT}° / ${pos.LON}°
             </td>
-            <td class="px-6 py-4">${pos.SOG} / ${pos.COG} / ${pos.Heading}</td>
-            <td class="px-6 py-4">${pos.Length} / ${pos.Width} / ${pos.Draft}</td>
+            <td class="px-6 py-4">${pos.SOG}° / ${pos.COG}° / ${pos.Heading}°</td>
+            <td class="px-6 py-4">${pos.Length}m / ${pos.Width}m / ${pos.Draft}m</td>
             <!-- Buttons for prediction -->
             <td class="flex items-center px-6 py-4">
                 <!-- Section for button and modal -->
